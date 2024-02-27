@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css">
+    <link rel="icon" href="./img/ESCUDO 2_prev_ui.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <img class="escudo" src="./img/ESCUDO 2_prev_ui.png">
+        <h2>Login</h2>
+        <div id="mensaje"></div>
+        <form onsubmit="login()">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <input type="submit" value="Login">
+        </form>
+        <p>¿No tienes una cuenta? <a href="registro.html">Regístrate</a></p>
+    </div>
+
+
+    <script>
+        function login() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            $.ajax({
+                type: "POST",
+                url: "login.php",
+                data: {
+                    username: username,
+                    password: password
+                },
+                success: function (response) {
+                    $('#mensaje').html(response);
+                    console.log(response);
+                }
+            });
+
+            event.preventDefault();
+        }
+    </script>
+
+
+</body>
+
+</html>
